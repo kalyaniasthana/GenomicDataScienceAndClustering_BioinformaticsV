@@ -44,7 +44,22 @@ def farthest_first_traversal(data, k, m):
 		centers.append(max_point)
 	return centers
 
+def squared_error_distortion(k, m, centers, data):
+	s = 0
+	for point in data:
+		s += (distance_from_datapoint_to_centers(centers, point))**2
+	n = len(data)
+	return s/n
 
+
+
+k = 5
+m = 2
+centers = farthest_first_traversal_input('centers.txt')
+data = farthest_first_traversal_input('data.txt')
+print(squared_error_distortion(k, m, centers, data))
+
+'''
 file = 'farthest.txt'
 k = 4
 m = 4
@@ -55,5 +70,6 @@ for i in c:
 	for k in i:
 		print(k, end = ' ')
 	print('')
+'''
 
 
