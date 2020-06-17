@@ -1,7 +1,4 @@
-import numpy as np
 import math
-import copy
-from collections import Counter
 
 def farthest_first_traversal_input(file):
 	read = open(file)
@@ -20,7 +17,6 @@ def dist(x, y):
 	return math.sqrt(d)
 
 def distance_from_datapoint_to_centers(centers, datapoint):
-
 	return min([dist(datapoint, center) for center in centers])
 
 def max_distance(data, centers):
@@ -33,7 +29,7 @@ def max_distance(data, centers):
 				max_dist = d
 				max_point = point
 
-	return max_point
+	return max_point, max_dist, '&'
 
 
 def farthest_first_traversal(data, k, m):
@@ -52,6 +48,11 @@ def squared_error_distortion(k, m, centers, data):
 		s += (distance_from_datapoint_to_centers(centers, point))**2
 	n = len(data)
 	return s/n
+
+data = [[2, 8], [2, 5], [6, 9], [7, 5], [5, 2]]
+centers = [[3, 5], [5, 4]]
+print(squared_error_distortion(0, 0, data, centers), '^^')
+
 
 
 def form_clusters(centers_assigned, data, k):
@@ -95,8 +96,18 @@ def kmeans(k, m, data):
 		else:
 			centers = c
 	return centers
-		
 
+'''
+FOR IMPROVEMENT
+k-Means++Initializer(Data, k)
+      Centers ← the set consisting of a single randomly chosen point from Data
+    while |Centers| < k 
+        randomly select DataPoint from Data with probability proportional to d(DataPoint, Centers)^2
+        add DataPoint to Centers
+    return Centers
+'''
+		
+'''
 k = 6
 m = 5
 data = farthest_first_traversal_input('kmeans.txt')
@@ -106,11 +117,7 @@ for i in centers:
 		print("%.3f"%k, end = ' ')
 	print('')
 
-
-
-
-
-
+'''
 
 
 '''
@@ -133,5 +140,8 @@ for i in c:
 		print(k, end = ' ')
 	print('')
 '''
+data = [[2, 6], [4, 9], [5, 7], [6, 5], [8, 3]]
+centers = [[4, 5], [7, 4]]
+print(max_distance(data, centers))
 
 
